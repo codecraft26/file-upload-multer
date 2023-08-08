@@ -20,8 +20,23 @@ const storage=multer.diskStorage({
         return cb(null,`${Date.now()}-${file.originalname}`)
     }
 })
-const fileFilter = function (req, file, cb) {
-    if (file.mimetype === 'application/pdf' ) {
+
+
+
+// check for he can uplaod only pdf file
+// const fileFilter = function (req, file, cb) {
+//     if (file.mimetype === 'application/pdf' ) {
+//       // Accept only JPG files
+//       cb(null, true);
+//     } else {
+//       // Reject other file types
+//       cb(new Error('Only pdf file is allowesd'));
+//     }
+//   };
+
+//it accept only image as upload  and alos less the 200 kb is  allowed 
+  const fileFilter = function (req, file, cb) {
+    if (file.mimetype === 'image/jpg' && file.size>=200*1024 ) {
       // Accept only JPG files
       cb(null, true);
     } else {
@@ -46,3 +61,4 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`server is running on ${port}`);
 });
+
